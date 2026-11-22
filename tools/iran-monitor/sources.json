@@ -1,0 +1,285 @@
+[
+  {
+    "id": "bbc",
+    "name": "BBC News",
+    "url": "https://feeds.bbci.co.uk/news/world/middle_east/rss.xml",
+    "home": "https://www.bbc.com/news/world/middle_east",
+    "hosts": [
+      "www.bbc.co.uk",
+      "www.bbc.com",
+      "bbc.co.uk",
+      "bbc.com"
+    ],
+    "feedHosts": [
+      "feeds.bbci.co.uk"
+    ],
+    "kind": "newsroom",
+    "affiliationNote": "UK public service broadcaster"
+  },
+  {
+    "id": "un",
+    "name": "UN News",
+    "url": "https://news.un.org/feed/subscribe/en/news/topic/peace-and-security/feed/rss.xml",
+    "home": "https://news.un.org/en/",
+    "hosts": [
+      "news.un.org"
+    ],
+    "feedHosts": [
+      "news.un.org"
+    ],
+    "kind": "official",
+    "affiliationNote": "United Nations news service"
+  },
+  {
+    "id": "france24",
+    "name": "France 24",
+    "url": "https://www.france24.com/en/middle-east/rss",
+    "home": "https://www.france24.com/en/middle-east/",
+    "hosts": [
+      "www.france24.com"
+    ],
+    "feedHosts": [
+      "www.france24.com"
+    ],
+    "kind": "newsroom",
+    "affiliationNote": "French public international broadcaster"
+  },
+  {
+    "id": "dw",
+    "name": "DW",
+    "url": "https://rss.dw.com/rdf/rss-en-world",
+    "home": "https://www.dw.com/en/",
+    "hosts": [
+      "www.dw.com"
+    ],
+    "feedHosts": [
+      "rss.dw.com"
+    ],
+    "kind": "newsroom",
+    "affiliationNote": "German public international broadcaster"
+  },
+  {
+    "id": "cnbc",
+    "name": "CNBC",
+    "url": "https://www.cnbc.com/id/100727362/device/rss/rss.html",
+    "home": "https://www.cnbc.com/world/",
+    "hosts": [
+      "www.cnbc.com"
+    ],
+    "feedHosts": [
+      "www.cnbc.com"
+    ],
+    "kind": "newsroom",
+    "affiliationNote": "US commercial financial news broadcaster"
+  },
+  {
+    "id": "npr",
+    "name": "NPR",
+    "url": "https://feeds.npr.org/1004/rss.xml",
+    "home": "https://www.npr.org/sections/world/",
+    "hosts": [
+      "www.npr.org"
+    ],
+    "feedHosts": [
+      "feeds.npr.org"
+    ],
+    "kind": "newsroom",
+    "affiliationNote": "US public media network"
+  },
+  {
+    "id": "nyt",
+    "name": "The New York Times",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml",
+    "home": "https://www.nytimes.com/section/world/middleeast",
+    "hosts": [
+      "www.nytimes.com"
+    ],
+    "feedHosts": [
+      "rss.nytimes.com"
+    ],
+    "kind": "newsroom",
+    "affiliationNote": "US newspaper; some articles paywalled"
+  },
+  {
+    "id": "pbs",
+    "name": "PBS NewsHour",
+    "url": "https://www.pbs.org/newshour/feeds/rss/world",
+    "home": "https://www.pbs.org/newshour/world",
+    "hosts": [
+      "www.pbs.org"
+    ],
+    "feedHosts": [
+      "www.pbs.org"
+    ],
+    "kind": "newsroom",
+    "affiliationNote": "US public television news service"
+  },
+  {
+    "id": "sky",
+    "name": "Sky News",
+    "url": "https://feeds.skynews.com/feeds/rss/world.xml",
+    "home": "https://news.sky.com/world",
+    "hosts": [
+      "news.sky.com"
+    ],
+    "feedHosts": [
+      "feeds.skynews.com"
+    ],
+    "kind": "newsroom",
+    "affiliationNote": "UK commercial broadcaster"
+  },
+  {
+    "id": "ft",
+    "name": "Financial Times",
+    "url": "https://www.ft.com/world?format=rss",
+    "home": "https://www.ft.com/world",
+    "hosts": [
+      "www.ft.com"
+    ],
+    "feedHosts": [
+      "www.ft.com"
+    ],
+    "kind": "newsroom",
+    "affiliationNote": "Financial newspaper; articles often paywalled"
+  },
+  {
+    "id": "economist",
+    "name": "The Economist",
+    "url": "https://www.economist.com/middle-east-and-africa/rss.xml",
+    "home": "https://www.economist.com/middle-east-and-africa",
+    "hosts": [
+      "www.economist.com"
+    ],
+    "feedHosts": [
+      "www.economist.com"
+    ],
+    "kind": "newsroom",
+    "affiliationNote": "News and analysis magazine; articles often paywalled"
+  },
+  {
+    "id": "mee",
+    "name": "Middle East Eye",
+    "url": "https://www.middleeasteye.net/rss",
+    "home": "https://www.middleeasteye.net/",
+    "hosts": [
+      "www.middleeasteye.net"
+    ],
+    "feedHosts": [
+      "www.middleeasteye.net"
+    ],
+    "kind": "newsroom",
+    "affiliationNote": "Middle East-focused digital news publisher"
+  },
+  {
+    "id": "lemonde",
+    "name": "Le Monde",
+    "home": "https://www.lemonde.fr/en/middle-east/",
+    "hosts": [
+      "www.lemonde.fr"
+    ],
+    "feedHosts": [
+      "www.lemonde.fr"
+    ],
+    "kind": "newsroom",
+    "affiliationNote": "French newspaper; English edition; some articles paywalled",
+    "url": "https://www.lemonde.fr/en/middle-east/rss_full.xml"
+  },
+  {
+    "id": "timesofisrael",
+    "name": "The Times of Israel",
+    "url": "https://www.timesofisrael.com/feed/",
+    "home": "https://www.timesofisrael.com/",
+    "hosts": [
+      "www.timesofisrael.com"
+    ],
+    "feedHosts": [
+      "www.timesofisrael.com"
+    ],
+    "kind": "newsroom",
+    "affiliationNote": "Israel-based digital news publisher"
+  },
+  {
+    "id": "jpost",
+    "name": "The Jerusalem Post",
+    "url": "https://www.jpost.com/rss/rssfeedsfrontpage.aspx",
+    "home": "https://www.jpost.com/",
+    "hosts": [
+      "www.jpost.com"
+    ],
+    "feedHosts": [
+      "www.jpost.com"
+    ],
+    "kind": "newsroom",
+    "affiliationNote": "Israel-based newspaper"
+  },
+  {
+    "id": "fcdo",
+    "name": "UK FCDO",
+    "url": "https://www.gov.uk/government/organisations/foreign-commonwealth-development-office.atom",
+    "home": "https://www.gov.uk/government/organisations/foreign-commonwealth-development-office",
+    "hosts": [
+      "www.gov.uk"
+    ],
+    "feedHosts": [
+      "www.gov.uk"
+    ],
+    "kind": "official",
+    "affiliationNote": "UK government department; official statements and guidance"
+  },
+  {
+    "id": "hrw",
+    "name": "Human Rights Watch",
+    "url": "https://www.hrw.org/rss/news",
+    "home": "https://www.hrw.org/",
+    "hosts": [
+      "www.hrw.org"
+    ],
+    "feedHosts": [
+      "www.hrw.org"
+    ],
+    "kind": "civil-society",
+    "affiliationNote": "Human rights research and advocacy organisation"
+  },
+  {
+    "id": "cbs",
+    "name": "CBS News",
+    "url": "https://www.cbsnews.com/latest/rss/world",
+    "home": "https://www.cbsnews.com/world/",
+    "hosts": [
+      "www.cbsnews.com"
+    ],
+    "feedHosts": [
+      "www.cbsnews.com"
+    ],
+    "kind": "newsroom",
+    "affiliationNote": "US commercial broadcaster"
+  },
+  {
+    "id": "euronews",
+    "name": "Euronews",
+    "url": "https://www.euronews.com/rss?level=theme&name=news",
+    "home": "https://www.euronews.com/news",
+    "hosts": [
+      "www.euronews.com"
+    ],
+    "feedHosts": [
+      "www.euronews.com"
+    ],
+    "kind": "newsroom",
+    "affiliationNote": "European international broadcaster"
+  },
+  {
+    "id": "tehrantimes",
+    "name": "Tehran Times",
+    "home": "https://www.tehrantimes.com/",
+    "hosts": [
+      "www.tehrantimes.com"
+    ],
+    "feedHosts": [
+      "www.tehrantimes.com"
+    ],
+    "kind": "state-affiliated",
+    "affiliationNote": "Iranian state-affiliated newspaper; treat official claims as attributed statements",
+    "url": "https://www.tehrantimes.com/rss"
+  }
+]

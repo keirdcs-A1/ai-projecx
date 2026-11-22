@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' ; style-src-attr 'none'; img-src 'self' data: blob:; font-src 'self'; connect-src https://en.wikipedia.org; object-src 'none'; base-uri 'none'; form-action 'none'; worker-src 'none'; media-src 'none'"><meta name="referrer" content="no-referrer"><link rel="icon" href="data:,">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Race between two random Wikipedia articles in three minutes.">
+    <title>Wikipedia Sprint</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <nav class="project-return"><span>AI ProjecX / Wikipedia Sprint</span><span>LIVE WIKIPEDIA · ROUTES STAY IN THIS TAB</span></nav>
+    <main class="app-shell">
+      <header class="masthead">
+        <a class="wordmark" href="./" aria-label="Wikipedia Sprint home">
+          <span class="wordmark-mark" aria-hidden="true">W</span>
+          <span>
+            <strong>Wikipedia Sprint</strong>
+            <small>Three minutes. Links only.</small>
+          </span>
+        </a>
+        <button class="button button-quiet" id="new-game-button" type="button" hidden>New challenge</button>
+      </header>
+
+      <section id="live-intro" class="challenge"><p class="eyebrow">WIKIPEDIA SPRINT</p><h1>Three minutes.<br>One connection.</h1><p>Race from one Wikipedia article to another using only the links inside the articles.</p><p>Loading a challenge contacts Wikipedia directly. Article titles and your network information reach Wikipedia; your route stays in this tab. No game tracking or account is used.</p><button id="load-live" type="button" class="button button-primary">Load live challenge →</button></section>
+      <section class="challenge" aria-labelledby="challenge-title" hidden>
+        <div class="challenge-heading">
+          <div>
+            <p class="eyebrow">Your challenge</p>
+            <h1 id="challenge-title">Find the connection</h1>
+          </div>
+          <button class="button button-quiet" id="reroll-button" type="button" disabled>Reroll</button>
+        </div>
+
+        <div class="route-pair" aria-live="polite">
+          <div class="route-point">
+            <span>Start</span>
+            <strong id="start-title">Finding an article…</strong>
+          </div>
+          <span class="route-arrow" aria-hidden="true">→</span>
+          <div class="route-point route-point-target">
+            <span>Target</span>
+            <strong id="target-title">Finding an article…</strong>
+          </div>
+        </div>
+
+        <div class="challenge-actions">
+          <p id="challenge-message">Loading a live Wikipedia challenge.</p>
+          <button class="button button-primary" id="start-button" type="button" disabled>Start sprint</button>
+        </div>
+      </section>
+
+      <section class="game" id="game" aria-label="Wikipedia Sprint game" hidden>
+        <div class="game-bar">
+          <div class="metrics" aria-live="polite">
+            <div class="metric">
+              <span>Time</span>
+              <strong id="timer">03:00</strong>
+            </div>
+            <div class="metric">
+              <span>Moves</span>
+              <strong id="move-count">0</strong>
+            </div>
+            <div class="metric metric-target">
+              <span>Target</span>
+              <strong id="live-target">—</strong>
+            </div>
+          </div>
+          <div class="timer-track" role="progressbar" aria-label="Time remaining" aria-valuemin="0" aria-valuemax="180" aria-valuenow="180">
+            <div class="timer-fill" id="timer-fill"></div>
+          </div>
+        </div>
+
+        <div class="article-toolbar">
+          <button class="button button-quiet" id="back-button" type="button" disabled>← Back</button>
+          <p id="page-status" role="status">Ready</p>
+        </div>
+
+        <article class="article" aria-labelledby="article-title" aria-busy="false">
+          <header class="article-header">
+            <p class="eyebrow">Wikipedia article</p>
+            <h2 id="article-title">Loading…</h2>
+          </header>
+          <p class="attribution">Article text adapted from <a id="article-source" href="https://en.wikipedia.org" target="_blank" rel="noreferrer">Wikipedia</a>. <a id="article-history" href="https://en.wikipedia.org" target="_blank" rel="noreferrer">Contributors & history</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a></p>
+          <div class="article-content" id="article-content"></div>
+          <div class="article-loading" id="article-loading" hidden>
+            <span class="spinner" aria-hidden="true"></span>
+            <p>Loading article…</p>
+          </div>
+          <div class="article-error" id="article-error" hidden>
+            <p id="article-error-message">This article could not be loaded.</p>
+            <button class="button" id="retry-page-button" type="button">Retry page</button>
+          </div>
+        </article>
+
+        <section class="trail" aria-labelledby="trail-title">
+          <div class="trail-heading">
+            <h2 id="trail-title">Route</h2>
+            <span id="trail-count">1 page</span>
+          </div>
+          <ol id="route-history"></ol>
+        </section>
+      </section>
+
+      <section class="result" id="result" aria-labelledby="result-title" hidden>
+        <p class="result-kicker" id="result-kicker">Sprint complete</p>
+        <h2 id="result-title">You made it</h2>
+        <p id="result-summary"></p>
+        <div class="result-stats">
+          <div><span>Time</span><strong id="result-time">00:00</strong></div>
+          <div><span>Moves</span><strong id="result-moves">0</strong></div>
+          <div><span>Pages</span><strong id="result-pages">1</strong></div>
+        </div>
+        <button class="button button-primary" id="play-again-button" type="button">Play again</button>
+      </section>
+
+      <section class="fatal-error" id="fatal-error" role="alert" hidden>
+        <h2>Wikipedia is out of reach</h2>
+        <p id="fatal-error-message">The live challenge could not be loaded.</p>
+        <button class="button button-primary" id="try-again-button" type="button">Try again</button>
+      </section>
+
+      <p class="sr-only" id="announcer" aria-live="assertive"></p>
+    </main>
+    <script src="./script.js" defer></script>
+  </body>
+</html>

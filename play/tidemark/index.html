@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; media-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f3f0e8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="description" content="A quiet island adventure. Gather, make, and bring the lights back to Bracken Bay.">
+  <title>Tidemark · An island to make your own</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='20' fill='%23df704f'/%3E%3Cpath d='M19 25h26M32 14v29q0 9 10 7' fill='none' stroke='%23fff5df' stroke-width='6'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="masthead">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">t</span><div><h1>tidemark<span class="brand-dot">.</span></h1><p>A little island. A fresh start.</p></div></div>
+      <div class="header-actions"><span id="save-indicator" class="save-indicator">Saved on this device</span><button class="icon-button" id="settings-button" aria-label="Open settings" data-icon="settings"></button></div>
+    </header>
+
+    <main class="game-shell">
+      <div class="playfield" id="playfield">
+        <canvas id="world" tabindex="0" aria-label="Island playfield. Tap a place to walk. Use arrow keys or WASD to move and E to interact."></canvas>
+        <div class="top-hud">
+          <button class="objective-chip" id="objective-button" aria-label="View your current island project"><span class="objective-icon" data-icon="beacon"></span><span><small>THE NEXT LITTLE THING</small><strong id="objective-text">A warm welcome</strong></span><span class="objective-arrow" data-icon="arrow"></span></button>
+          <div class="vitals" aria-label="Health"><span data-icon="heart"></span><span id="health-label">100</span><span class="health-track"><span id="health-fill"></span></span></div>
+        </div>
+        <div class="location-label"><span class="location-dot"></span><span id="location">Bracken Bay</span><span class="location-sub" id="location-sub">The island is yours to explore</span></div>
+        <div id="toast" class="toast" role="status" aria-live="polite"></div>
+        <div id="gather-progress" class="gather-progress" hidden><span id="gather-label">Gathering</span><div><i id="gather-fill"></i></div></div>
+        <div id="joystick" class="joystick" aria-hidden="true"><div id="joystick-knob"></div></div>
+        <button id="centre-button" class="centre-button" aria-label="Return to Bracken Bay" title="Return to Bracken Bay" data-icon="home"></button>
+        <div class="canvas-hint" id="canvas-hint">Tap to wander · Tap a resource to gather</div>
+        <div class="weather-tag"><span class="sun-mark"></span> AFTER THE STORM</div>
+      </div>
+
+      <div class="action-bar">
+        <div class="action-description"><span class="action-symbol" id="action-symbol" data-icon="compass"></span><div><strong id="action-title">Take the slow way</strong><p id="action-detail">Walk over to something that catches your eye.</p></div></div>
+        <button id="interact-button" class="primary-button" disabled><span id="interact-label">Explore</span><span class="key-hint">E</span></button>
+        <button id="stop-button" class="icon-button" aria-label="Stop moving or gathering" data-icon="stop"></button>
+      </div>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Game menus">
+      <button data-panel="bag"><span data-icon="bag"></span><span>Satchel</span><small id="bag-count">3</small></button>
+      <button data-panel="journal"><span data-icon="journal"></span><span>Journal</span><i id="journal-dot" class="notification-dot"></i></button>
+      <button data-panel="map"><span data-icon="map"></span><span>Island</span></button>
+      <span class="nav-divider"></span>
+      <div class="nav-note"><span class="status-dot"></span><span id="nav-status">No rush. You’re on island time.</span></div>
+      <button id="help-button" class="help-button"><span data-icon="help"></span><span>How to play</span></button>
+    </nav>
+  </div>
+
+  <div class="sheet-backdrop" id="sheet-backdrop" hidden></div>
+  <section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <header class="sheet-header"><div><p id="sheet-eyebrow">YOUR POCKET OF THE WORLD</p><h2 id="sheet-title">Satchel</h2></div><button id="close-sheet" class="icon-button" aria-label="Close menu" data-icon="close"></button></header>
+    <div class="sheet-content" id="sheet-content"></div>
+    <footer class="sheet-footer"><span class="status-dot"></span> The island waits while this menu is open.</footer>
+  </section>
+  <script src="./game.js" defer></script>
+</body>
+</html>

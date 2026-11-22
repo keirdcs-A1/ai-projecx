@@ -1,0 +1,186 @@
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' ; style-src-attr 'none'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; worker-src 'none'; media-src 'none'"><meta name="referrer" content="no-referrer"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Vaelor | AI ProjecX</title><link rel="stylesheet" href="./vendor/fonts.css"><link rel="stylesheet" href="./app.css"></head><body>
+
+
+
+
+
+<div id="app" class="pregame">
+  <canvas id="webglCanvas"></canvas>
+  <canvas id="hudCanvas"></canvas>
+  <div id="vignette"></div>
+
+  <section id="player-frame" class="hud" aria-label="Player status">
+    <div class="pf-top">
+      <div class="pf-sigil" aria-hidden="true"></div>
+      <div>
+        <div class="pf-name"><span id="pf-player-name">STARBORN</span> <span class="asc" id="power-lvl-badge" title="Combat level: worked out from your combat skills">COMBAT 3</span><span class="asc" id="pf-calling" data-game-style="color:var(--shard)">Recruit</span></div>
+        <div id="region-badge">Solstice Bastion</div>
+      </div>
+    </div>
+    <div class="bar hp" data-explain="hp" title="HP: tap for details"><i id="hp-fill"></i><span><b>HP</b><b id="hp-badge">15 / 15</b></span></div>
+    <div class="bar od" id="od-bar" data-explain="od" title="Overdrive: tap for details"><i id="od-fill"></i><span><b>OVERDRIVE</b><b id="od-badge">100%</b></span></div>
+    <div class="pf-row"><span id="coins-badge" class="mono">150 Credits</span><span id="ammo-badge" class="mono">30 cells · 0 slugs</span></div>
+  </section>
+
+  <section id="quest-tracker" class="hud" aria-label="Campaign objective" title="Open the journal">
+    <div class="label qt-act" id="qt-act">Act I · Embers of the Bastion</div>
+    <div id="qt-title">Waking Light</div>
+    <div id="qt-obj">Speak with Commander Vance</div>
+    <div id="qt-meta"><span id="qt-progress"></span><span id="qt-dist" class="mono"></span></div>
+    <div id="bounty-line" class="hidden"></div>
+  </section>
+
+  <section id="target-frame" class="hud hidden" aria-live="polite">
+    <div id="target-name"><span id="target-title">Target</span><small id="target-level">T1</small></div>
+    <div class="bar"><i id="target-hp-bar"></i><span><b id="target-hp-text"></b><b id="target-range"></b></span></div>
+    <div id="target-status"></div>
+  </section>
+
+  <section id="minimap-wrap">
+    <div id="minimap-ring"><canvas id="minimapCanvas" width="368" height="368"></canvas><div id="mm-north">N</div></div>
+    <div id="coords-label" class="mono">SEC 22 · 32</div>
+    <div class="mm-buttons">
+      <button class="btn" id="btn-world-map" title="Star chart (M)">Map</button>
+      <button class="btn" id="btn-sanctum-recall" title="Phase-recall to the Bastion">Recall</button>
+      <button class="btn" id="btn-save" title="Save progress on this device">Save</button>
+      <button class="btn" id="btn-settings" title="Settings and controls">Settings</button>
+    </div>
+  </section>
+
+  <div id="hover-banner">Click to move. Click an enemy to attack from range.</div>
+
+  <section id="action-bar" class="hud" aria-label="Action bar">
+    <button class="slot-btn" id="weapon-mode" title="Weapon mode (G): Auto fires your sidearm from range and switches to melee up close">
+      <img id="wm-primary" alt=""><img id="wm-sidearm" alt="">
+      <span class="wm-label" id="wm-label">AUTO</span>
+    </button>
+    <span class="ab-sep"></span>
+    <div id="ability-slots" data-game-style="display:flex;gap:6px"></div>
+    <span class="ab-sep"></span>
+    <button class="slot-btn" id="quick-eat" title="Eat the best food in your pack (X)"><span class="key">X</span><img id="qe-icon" alt=""><span class="cnt" id="qe-count">0</span></button>
+    <button class="slot-btn" id="btn-run-toggle" title="Toggle running (R). Running drains run energy; walking restores it."><span class="key">R</span><span class="cnt" id="run-pct">100%</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 4a1.5 1.5 0 1 0 0 .01M8 21l3-6 3 2v4M7 12l3-4 4 1 3 4M10 8l-1 5"/></svg></button>
+    <div id="tick-line"><div id="tick-bar"></div></div>
+  </section>
+
+  <section id="chat-wrap" class="hud collapsed" aria-label="Log">
+    <div id="chat-messages" aria-live="polite"></div>
+    <form id="chat-form" autocomplete="off">
+      <input id="chat-input" maxlength="90" placeholder="Say something, or /help">
+      <button type="submit" class="btn">Send</button>
+    </form>
+  </section>
+
+  <nav id="dock-tabs">
+    <button class="btn" data-tab="inventory">Pack <kbd>I</kbd></button>
+    <button class="btn" data-tab="skills">Skills <kbd>K</kbd></button>
+    <button class="btn" data-tab="equipment">Gear <kbd>C</kbd></button>
+    <button class="btn" data-tab="journal">Journal <kbd>J</kbd></button>
+    <button class="btn" id="btn-chat-toggle">Log</button>
+  </nav>
+
+  <aside id="dock" class="hud hidden" aria-label="Character panels">
+    <div class="dock-head"><h2 id="dock-title">Pack</h2><button class="btn" id="dock-close">Close</button></div>
+    <div class="dock-body">
+      <div class="tab-panel" id="tab-inventory">
+        <div id="inventory-grid"></div>
+        <div class="inv-foot"><span>Click: use or equip</span><span>Right-click: more</span></div>
+      </div>
+      <div class="tab-panel hidden" id="tab-skills"><div id="skills-list"></div></div>
+      <div class="tab-panel hidden" id="tab-equipment"><div id="gear-list"></div><div id="gear-stats"></div>
+        <div class="label sec-title">Doctrine (melee XP)</div>
+        <div class="seg">
+          <button class="btn style-btn" data-style="Accurate">Precision</button>
+          <button class="btn style-btn" data-style="Aggressive">Force</button>
+          <button class="btn style-btn" data-style="Defensive">Guard</button>
+        </div>
+      </div>
+      <div class="tab-panel hidden" id="tab-journal"><div id="journal-body"></div></div>
+    </div>
+  </aside>
+
+  <div id="toasts"></div>
+  <div id="region-card"><div class="label">Entering</div><div class="rc-name" id="rc-name"></div><div class="rc-rule"></div><div class="rc-sub" id="rc-sub"></div></div>
+  <div id="act-banner"><div class="ab-inner"><div class="ab-act" id="ab-act"></div><div class="ab-title" id="ab-title"></div></div></div>
+
+  <section id="dialogue" class="hud hidden" role="dialog" aria-live="polite">
+    <div class="dlg-head">
+      <div class="dlg-sigil" aria-hidden="true"></div>
+      <div class="dlg-who"><div id="dlg-speaker"></div><div id="dlg-sub"></div></div>
+      <button class="btn" id="dlg-close">Leave</button>
+    </div>
+    <div id="dlg-text"></div>
+    <div id="dlg-options"></div>
+  </section>
+
+  <section id="modal-anvil" class="hud modal hidden" aria-label="Artifice Resonator">
+    <div class="dock-head"><h2>Artifice Resonator</h2><button class="btn close-modal">Close</button></div>
+    <div class="dock-body"><div class="card-grid" id="anvil-recipes"></div></div>
+    <div class="modal-foot">Uses alloys from your pack. Smelt ore into alloys at a Thermal Smelter.</div>
+  </section>
+  <section id="modal-bank" class="hud modal hidden" aria-label="Stasis Vault">
+    <div class="dock-head"><h2>Continuum Stasis Vault</h2><button class="btn close-modal">Close</button></div>
+    <div class="dock-body"><div id="bank-grid"></div></div>
+    <div class="modal-foot"><span id="bank-count-label">0 stacks</span><span>Click a vault stack to withdraw. Click pack items to deposit.</span><button class="btn" id="btn-deposit-inv">Deposit pack</button></div>
+  </section>
+  <section id="modal-shop" class="hud modal hidden" aria-label="Quartermaster">
+    <div class="dock-head"><h2 id="shop-title">Quartermaster Exchange</h2><button class="btn close-modal">Close</button></div>
+    <div class="dock-body"><div class="card-grid" id="shop-grid"></div></div>
+    <div class="modal-foot"><span>Click pack items to sell for 65% of value.</span><button class="btn gold" id="btn-sell-resources">Sell all materials</button></div>
+  </section>
+  <section id="modal-worldmap" class="hud modal hidden" aria-label="Star chart" data-game-style="width:min(900px, calc(100vw - 32px)); max-height: calc(100vh - 60px)">
+    <div class="dock-head"><h2>Star Chart of Vaelor</h2><button class="btn close-modal">Close</button></div>
+    <div class="dock-body" data-game-style="position:relative"><canvas id="worldMapCanvas" width="1024" height="800"></canvas><div id="map-tip" class="hidden"></div><div id="map-legend"></div></div>
+    <div class="modal-foot"><div class="map-tools"><button class="btn" id="map-zoom-out" aria-label="Zoom out">−</button><button class="btn" id="map-zoom-in" aria-label="Zoom in">+</button><button class="btn" id="map-centre">Centre on me</button><span>Scroll or pinch to zoom, drag to move, click to plot a course.</span></div><span>Phase beacons:</span><div class="tele-row" id="tele-row"></div></div>
+  </section>
+  <section id="modal-settings" class="hud modal hidden" aria-label="Settings">
+    <div class="dock-head"><h2>Settings</h2><button class="btn close-modal">Close</button></div>
+    <div class="dock-body" id="settings-body"></div>
+  </section>
+
+  <div id="context-menu" class="hud hidden"><span class="label" id="ctx-title">Actions</span><div id="context-options"></div></div>
+
+  <div id="mobile-dpad" class="hud hidden">
+    <span></span><button data-step="0,-1" aria-label="Move forward">▲</button><span></span>
+    <button data-step="-1,0" aria-label="Move left">◀</button><button id="btn-quick-interact" aria-label="Interact with nearest">●</button><button data-step="1,0" aria-label="Move right">▶</button>
+    <span></span><button data-step="0,1" aria-label="Move back">▼</button><span></span>
+  </div>
+
+  <div id="bar-explain" class="hud hidden"><b id="bx-title"></b><p id="bx-text"></p></div>
+  <div id="death-overlay" class="hidden"><div><h2>KNOCKED OUT</h2><p id="death-text">Emergency phase-recall engaged.</p></div></div>
+
+  <section id="title-screen">
+    <div class="label ts-eyebrow">Campaign 1</div>
+    <h1 class="ts-word">VAELOR</h1>
+    <div class="ts-sub">Uniting the Stars</div>
+    <p class="ts-tag">The Heart of the old relay network fell over Vaelor and broke apart in the sky. Recover its pieces, restart the signal that once joined the stars, and decide who gets to control it.</p>
+    <div class="ts-actions">
+      <button class="btn primary" id="btn-continue">Continue</button>
+      <button class="btn" id="btn-new">New campaign</button>
+    </div>
+    <form class="ts-name hidden" id="ts-name" autocomplete="off">
+      <label class="label" for="name-input">What do they call you, Starborn?</label>
+      <div class="ts-name-row"><input id="name-input" maxlength="16" placeholder="Your name" spellcheck="false"><button class="btn primary" type="submit">Begin</button></div>
+      <small id="name-err"></small>
+    </form>
+    <p class="ts-note" id="ts-note"><kbd>Click</kbd> move or attack · enemies at range get shot automatically · <kbd>1-6</kbd> abilities · <kbd>Space</kbd> dash · <kbd>WASD</kbd> move · drag to orbit the camera</p>
+  </section>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="./app.js"></script></body></html>

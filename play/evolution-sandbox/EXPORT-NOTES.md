@@ -1,0 +1,15 @@
+# Evolution Sandbox export
+
+Standalone browser bundle copied from the reviewed portfolio integration. Its simulation code is unchanged. Browser QA identified an existing save-transfer bug: normal world exports exceeded the original 10 MB import cap. This standalone copy now uses a matching 64 MiB (67,108,864 bytes) import/export cap, checks exported snapshots with the existing validator, shows import/export failures in the Saves panel and resets the file picker after import attempts so the same file can be selected again. Files above the cap are not downloaded or imported. The host navigation is now local text, scripts and styles use relative paths, and the style element created by the original application is authorised by a SHA-256 CSP hash. No server, account or database service is required.
+
+## Data note
+
+The current world, creatures, environmental controls, interventions, view and selection are held in tab memory. Manual world saves, three rotating autosaves and custom creature templates persist in IndexedDB, database `ai-projecx-choose-life`, object stores `snapshots` and `templates`. Snapshots contain a save name and timestamp, simulation state, seed and intervention history; templates contain the visitor's creature settings. JSON export creates a local `choose-life.json` download. Import reads a visitor-selected JSON file locally into an empty save slot, with the existing format/structural validation and a 64 MiB (67,108,864 bytes) file limit. No save file is uploaded. No localStorage, sessionStorage, cookies, analytics or remote requests are made by the application. Loading the app requests its files from the chosen static host; that host receives normal network request information. Nothing from the simulation or saved files is transmitted. Browser storage belongs to the host origin, rather than an individual subfolder, and the previous private host's saves do not transfer automatically. Visitors can transfer supported worlds with export/import.
+
+## Content and licences
+
+The original simulation and UI are portfolio project code; this export does not grant a new open-source licence. No external runtime library, web font, image, script or CDN is used. Fonts are browser/system fonts. No source maps are included.
+
+## Checks
+
+JavaScript syntax checking passed. Relative HTML and CSS asset references resolve to exported local files. Static text scan found no private file paths, email addresses, secret patterns or private hosted-domain references. A regression test in `tests/save-roundtrip.mjs` exercises the corrected save handlers with a representative 96 × 96, 160-creature world (or a supplied exported snapshot), including full world/intervention equality after JSON export/import, malformed JSON, malformed structure, retry reset and both oversized-file limits. Run `node tests/save-roundtrip.mjs` from this folder, or supply a synthetic exported JSON filename as its argument. The bundled test-support module is local and is never loaded by the app. Browser interaction results are recorded in the top-level README; exhaustive simulation and historical save compatibility testing remains outside these checks.

@@ -1,0 +1,82 @@
+{
+  "bbc": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "un": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "france24": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "dw": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "cnbc": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "npr": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "nyt": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "pbs": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "sky": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "ft": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "economist": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "mee": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "lemonde": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "timesofisrael": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "jpost": {
+    "publishHeadlines": true,
+    "basis": "RSS website use permitted by publisher terms; feed text and links only"
+  },
+  "fcdo": {
+    "publishHeadlines": true,
+    "basis": "OGL v3.0 with attribution"
+  },
+  "hrw": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "cbs": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "euronews": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  },
+  "tehrantimes": {
+    "publishHeadlines": false,
+    "basis": "Withheld: permission for this public curated snapshot has not been established. See FEED-TERMS.md."
+  }
+}
